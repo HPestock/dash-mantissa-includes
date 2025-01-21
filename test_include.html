@@ -22,6 +22,7 @@
       }
 
       async function getData(url) {
+        var err = 0,text;
   //const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQZIvKyrG04m08qqkvy-7j29Ws91Q3Dk4ITp7ByACtGObrzJ9WgJd6hNHntTnVeisoHUcZNzK0j3oPy/pub?output=csv&range=A1";
   try {
     const response = await fetch(url);
@@ -29,14 +30,14 @@
       throw new Error(`Response status: ${response.status}`);
     }
 
-    const text = await response.text();
+    text = await response.text();
     //console.log(response);
     //console.log(json);
-    return [0,text];
   } catch (error) {
     console.error(error.message);
-    return [-1,""];
+    err = -1;
   }
+        return [err,text];
         
 }
       
